@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 22 sep. 2024 à 14:05
+-- Généré le : lun. 23 sep. 2024 à 16:14
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -21,12 +21,23 @@ SET time_zone = "+00:00";
 -- Base de données : `tifosi`
 --
 
+-- Script pour créer la base de données
+
+CREATE DATABASE IF NOT EXISTS `tifosi` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+USE `tifosi`;
+
+-- L'utilisateur admin
+
+GRANT ALL PRIVILEGES ON *.* TO `tifosi`@`localhost` IDENTIFIED BY PASSWORD '*EAE04B24CB15802AA61AE004A4C034F637D7F83F' WITH GRANT OPTION;
+
+GRANT ALL PRIVILEGES ON `tifosi`.* TO `tifosi`@`localhost`;
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `boisson`
 --
 
+DROP TABLE IF EXISTS `boisson`;
 CREATE TABLE `boisson` (
   `id_boisson` int(11) NOT NULL,
   `nom_boisson` varchar(45) NOT NULL
@@ -56,6 +67,7 @@ INSERT INTO `boisson` (`id_boisson`, `nom_boisson`) VALUES
 -- Structure de la table `boisson_appartientmarque`
 --
 
+DROP TABLE IF EXISTS `boisson_appartientmarque`;
 CREATE TABLE `boisson_appartientmarque` (
   `id_boisson` int(11) NOT NULL,
   `id_marque` int(11) DEFAULT NULL
@@ -85,6 +97,7 @@ INSERT INTO `boisson_appartientmarque` (`id_boisson`, `id_marque`) VALUES
 -- Structure de la table `client`
 --
 
+DROP TABLE IF EXISTS `client`;
 CREATE TABLE `client` (
   `id_client` int(11) NOT NULL,
   `nom_client` varchar(45) NOT NULL,
@@ -98,6 +111,7 @@ CREATE TABLE `client` (
 -- Structure de la table `client_achetefocaccia`
 --
 
+DROP TABLE IF EXISTS `client_achetefocaccia`;
 CREATE TABLE `client_achetefocaccia` (
   `id_client` int(11) NOT NULL,
   `id_focaccia` int(11) NOT NULL,
@@ -110,6 +124,7 @@ CREATE TABLE `client_achetefocaccia` (
 -- Structure de la table `client_payemenu`
 --
 
+DROP TABLE IF EXISTS `client_payemenu`;
 CREATE TABLE `client_payemenu` (
   `id_client` int(11) NOT NULL,
   `id_menu` int(11) NOT NULL,
@@ -122,6 +137,7 @@ CREATE TABLE `client_payemenu` (
 -- Structure de la table `focaccia`
 --
 
+DROP TABLE IF EXISTS `focaccia`;
 CREATE TABLE `focaccia` (
   `id_focaccia` int(11) NOT NULL,
   `nom_focaccia` varchar(45) NOT NULL,
@@ -148,6 +164,7 @@ INSERT INTO `focaccia` (`id_focaccia`, `nom_focaccia`, `prix_focaccia`) VALUES
 -- Structure de la table `focaccia_comprendingredient`
 --
 
+DROP TABLE IF EXISTS `focaccia_comprendingredient`;
 CREATE TABLE `focaccia_comprendingredient` (
   `id_focaccia` int(11) DEFAULT NULL,
   `id_ingredient` int(11) DEFAULT NULL
@@ -223,6 +240,7 @@ INSERT INTO `focaccia_comprendingredient` (`id_focaccia`, `id_ingredient`) VALUE
 -- Structure de la table `focaccia_constituemenu`
 --
 
+DROP TABLE IF EXISTS `focaccia_constituemenu`;
 CREATE TABLE `focaccia_constituemenu` (
   `id_focaccia` int(11) DEFAULT NULL,
   `id_menu` int(11) NOT NULL
@@ -234,6 +252,7 @@ CREATE TABLE `focaccia_constituemenu` (
 -- Structure de la table `ingredient`
 --
 
+DROP TABLE IF EXISTS `ingredient`;
 CREATE TABLE `ingredient` (
   `id_ingredient` int(11) NOT NULL,
   `nom_ingredient` varchar(45) NOT NULL
@@ -276,6 +295,7 @@ INSERT INTO `ingredient` (`id_ingredient`, `nom_ingredient`) VALUES
 -- Structure de la table `marque`
 --
 
+DROP TABLE IF EXISTS `marque`;
 CREATE TABLE `marque` (
   `id_marque` int(11) NOT NULL,
   `nom_marque` varchar(45) NOT NULL
@@ -297,6 +317,7 @@ INSERT INTO `marque` (`id_marque`, `nom_marque`) VALUES
 -- Structure de la table `menu`
 --
 
+DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `id_menu` int(11) NOT NULL,
   `nom_menu` varchar(45) NOT NULL,
@@ -309,6 +330,7 @@ CREATE TABLE `menu` (
 -- Structure de la table `menu_contientboisson`
 --
 
+DROP TABLE IF EXISTS `menu_contientboisson`;
 CREATE TABLE `menu_contientboisson` (
   `id_menu` int(11) NOT NULL,
   `id_boisson` int(11) DEFAULT NULL
